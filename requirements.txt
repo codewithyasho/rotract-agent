@@ -1,0 +1,6 @@
+langchain
+langchain-core
+langchain-community
+langchain-groq
+firebase-admin
+python-dotenv
