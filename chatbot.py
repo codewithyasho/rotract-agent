@@ -1,4 +1,15 @@
 import os
+import warnings
+
+# Suppress annoying deprecation warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+try:
+    from urllib3.exceptions import NotOpenSSLWarning
+    warnings.filterwarnings("ignore", category=NotOpenSSLWarning)
+except ImportError:
+    pass
+
 from typing import List, Dict, Any
 from datetime import datetime
 
@@ -103,7 +114,7 @@ def get_chatbot_executor():
     agent = create_tool_calling_agent(llm, tools, prompt)
     
     # Create the executor that manages the agent's execution loop
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=False)
     return agent_executor
 
 # 4. Interactive Chat Loop
